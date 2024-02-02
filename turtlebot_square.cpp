@@ -4,10 +4,14 @@
 #include "geometry_msgs/Twist.h"
 #include "nav_msgs/Odometry.h"
 
-float x_p,y_p,x_o,y_o,z_o,w_o;
 
 
-void odom_callback(const nav_msgs::Odometry::ConstPtr& data)
+
+
+class turtlebot{
+    public:
+    static float x_p,y_p,x_o,y_o,z_o,w_o;
+    static void odom_callback(const nav_msgs::Odometry::ConstPtr& data)
 {
     x_p = data->pose.pose.position.x;
     y_p = data->pose.pose.position.y;
@@ -19,8 +23,6 @@ void odom_callback(const nav_msgs::Odometry::ConstPtr& data)
     
 }
 
-class turtlebot{
-    public:
     geometry_msgs::Twist data;
     ros::NodeHandle n;
     ros::Publisher pub = n.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
@@ -155,7 +157,15 @@ class turtlebot{
 
 
 
-};
+}; 
+float turtlebot::x_o=0.0;
+float turtlebot::y_o=0.0;
+float turtlebot::z_o=0.0;
+float turtlebot::w_o=0.0;
+float turtlebot::x_p=0.0;
+float turtlebot::y_p=0.0;
+
+
 
 
 int main(int argc,char**argv){
